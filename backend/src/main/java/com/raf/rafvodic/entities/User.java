@@ -3,14 +3,27 @@ package com.raf.rafvodic.entities;
 import com.raf.rafvodic.enums.UserStatus;
 import com.raf.rafvodic.enums.UserType;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class User {
 
+    @NotNull
     private int id;
+    @NotNull
+    @Size(min = 5, max = 50)
     private String email; // unique
+    @NotNull
+    @Size(min = 2, max = 50)
     private String firstName;
+    @NotNull
+    @Size(min = 2, max = 50)
     private String lastName;
+    @NotNull
     private String hashedPassword;
+    @NotNull
     private UserType userType;
+    @NotNull
     private UserStatus status;
 
     public User() {

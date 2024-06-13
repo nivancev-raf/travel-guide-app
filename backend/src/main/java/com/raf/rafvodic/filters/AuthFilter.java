@@ -1,6 +1,7 @@
 package com.raf.rafvodic.filters;
 
-
+import com.raf.rafvodic.entities.User;
+import com.raf.rafvodic.enums.UserType;
 import com.raf.rafvodic.resources.UserResource;
 import com.raf.rafvodic.services.UserService;
 
@@ -25,22 +26,32 @@ public class AuthFilter implements ContainerRequestFilter {
             return;
         }
 
+
         try {
             String token = requestContext.getHeaderString("Authorization");
             if(token != null && token.startsWith("Bearer ")) {
                 token = token.replace("Bearer ", "");
             }
+            System.out.println("Token: " + token);
 
             if (!this.userService.isAuthorized(token)) {
                 requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
             }
+
         } catch (Exception exception) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
         }
     }
 
+
     private boolean isAuthRequired(ContainerRequestContext req) {
-        if (req.getUriInfo().getPath().contains("login")) {
+        if (req.getUriInfo().getPath().contains("login") || req.getUriInfo().getPath().contains("most-read")
+        || req.getUriInfo().getPath().contains("articledetails")) {
+            return false;
+        }
+
+        // dodato jer guest treba da vidi koji je user napisao article
+        if (req.getUriInfo().getPath().matches(".*users/\\d+")) {
             return false;
         }
 

@@ -11,6 +11,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.inject.Inject;
 import java.util.Date;
+import java.util.List;
 
 public class UserService {
 
@@ -20,10 +21,8 @@ public class UserService {
     public String login(String email, String password)
     {
         String hashedPassword = DigestUtils.sha256Hex(password);
-        System.out.println("Hashed password: " + hashedPassword);
 
         User user = this.userRepository.findUserByEmail(email);
-        System.out.println("User: " + user);
         if (user == null || !user.getHashedPassword().equals(hashedPassword)) {
             System.out.println("User not found or password is incorrect");
             return null;
@@ -41,6 +40,7 @@ public class UserService {
                 .withExpiresAt(expiresAt)
                 .withSubject(email)
                 .withClaim("role", user.getUserType().toString())
+                .withClaim("userId", user.getId())
                 .sign(algorithm);
     }
 
@@ -54,10 +54,31 @@ public class UserService {
 
         User user = this.userRepository.findUserByEmail(email);
 
-        if (user == null){
+        if (user == null || jwt.getClaim("role").asString().equals("EDITOR")){
             return false;
         }
+//        if (user == null){
+//            return false;
+//        }
+
 
         return true;
+    }
+
+
+    public User findUserById(int id) {
+        return userRepository.findUserById(id);
+    }
+    public List<User> getAllUsers(int page, int limit) {
+        int offset = (page - 1) * limit;
+        return userRepository.getAllUsers(offset, limit);
+    }
+    public User addUser(User user) {
+        return userRepository.addUser(user);
+    }
+
+    // update
+    public User updateUser(User user) {
+        return userRepository.updateUser(user);
     }
 }
