@@ -16,5 +16,4 @@ public interface ArticleRepository {
     public void deleteArticle(int id);
     public List<Article> getArticlesByDestinationId(int id);
 
-
 }

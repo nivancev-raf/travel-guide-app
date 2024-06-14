@@ -47,21 +47,6 @@ public class CommentRepositoryImpl extends MySqlAbstractRepository implements Co
     }
 
     @Override
-    public Comment findCommentById(int id) {
-        return null;
-    }
-
-    @Override
-    public Comment findCommentByName(String name) {
-        return null;
-    }
-
-    @Override
-    public List<Comment> getAllComments() {
-        return null;
-    }
-
-    @Override
     public List<Comment> getCommentsByArticleId(int articleId) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -94,15 +79,6 @@ public class CommentRepositoryImpl extends MySqlAbstractRepository implements Co
         return comments;
     }
 
-    @Override
-    public Comment updateComment(Comment comment) {
-        return null;
-    }
-
-    @Override
-    public void deleteComment(int id) {
-
-    }
 
     @Override
     public void deleteCommentsByArticleId(int id) {

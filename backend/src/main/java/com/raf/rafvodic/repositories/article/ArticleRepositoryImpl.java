@@ -84,11 +84,6 @@ public class ArticleRepositoryImpl extends MySqlAbstractRepository implements Ar
         return article;
     }
 
-    @Override
-    public Article findArticleByName(String name) {
-        return null;
-    }
-
 
     @Override
     public List<Article> getAllArticles(int offset, int limit) {
