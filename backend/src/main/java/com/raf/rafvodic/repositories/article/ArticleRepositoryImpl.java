@@ -181,7 +181,7 @@ public class ArticleRepositoryImpl extends MySqlAbstractRepository implements Ar
         try {
             connection = this.newConnection();
 
-            // Assuming the filter string is something like "creationTime,gt,2024-05-03T15:54:05.262Z"
+            // creationTime,gt,2024-05-03T15:54:05.262Z"
             String[] filterParts = filter.split(",");
             String filterColumn = filterParts[0];
             String filterOperator = filterParts[1];
@@ -203,7 +203,7 @@ public class ArticleRepositoryImpl extends MySqlAbstractRepository implements Ar
                     throw new IllegalArgumentException("Invalid filter operator: " + filterOperator);
             }
 
-            // Construct the query dynamically
+
             String query = "SELECT * FROM articles WHERE " + filterColumn + " " + sqlOperator + " ? ORDER BY " + sort.replace(",", " ") + " LIMIT ?";
 
             preparedStatement = connection.prepareStatement(query);
