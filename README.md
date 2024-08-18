@@ -69,6 +69,11 @@ The Travel Guide Platform is designed to allow content creators to manage travel
 - **CMS**: Login with an admin or content editor account to manage destinations and articles.
 - **Public Platform**: Explore travel articles, read detailed content, and engage with other users through comments.
 
+## Documentation
+
+The complete documentation for the **Travel Guide Platform** project, including the technical and functional requirements, is available in the following pdf document:
+- [Travel Guide Platform Project Documentation](https://github.com/nivancev-raf/travel-guide-app/blob/master/Web%20programiranje%20-%20projekat.pdf)
+
 ## Contact
 For any questions or feedback, please reach out to nivancev02@gmail.com.
 
